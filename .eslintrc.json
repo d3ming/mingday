@@ -1,0 +1,25 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest/globals": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+      "prettier",
+      "jest"
+    ],
+    "rules": {
+        "prettier/prettier": "warn"
+    },
+    "extends": [
+      "prettier",
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ]
+}
