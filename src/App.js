@@ -1,18 +1,37 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
+import { Header } from "./components/Header";
+import { NoteList } from "./components/Note";
+import { AddNote } from "./components/AddNote";
+
+const MINGDAY_DB = {
+  notes: [
+    {
+      text: "Hello world",
+      datetime: "2017-01-01"
+    },
+    {
+      text: "It's my birthday",
+      datetime: "2017-01-03"
+    }
+  ]
+};
+
 class App extends Component {
+  componentWillMount() {
+    const initialData = MINGDAY_DB;
+    this.setState({
+      notes: initialData.notes
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Header />
+        <NoteList notes={this.state.notes} />
+        <AddNote />
       </div>
     );
   }
