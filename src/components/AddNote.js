@@ -20,19 +20,16 @@ export class AddNote extends Component {
     if (e.key !== "Enter" || !this.state.textToAdd) {
       return;
     }
-
-    const textToAdd = this.state.textToAdd;
+    this.props.onAddNote(this.state.textToAdd);
     this.setState({
       adding: false,
       textToAdd: ""
     });
-
-    this.props.onAddNote(textToAdd);
   };
 
   focusInput = () => {
     this.addNoteInput.focus();
-  }
+  };
 
   componentDidMount() {
     this.focusInput();
@@ -41,7 +38,9 @@ export class AddNote extends Component {
   render() {
     return (
       <TextField
-        ref={input => { this.addNoteInput = input; }}
+        ref={input => {
+          this.addNoteInput = input;
+        }}
         hintText="Start typing..."
         onChange={this.updateNewNoteText}
         onKeyPress={this.addNote}
