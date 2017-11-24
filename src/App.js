@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import * as moment from 'moment';
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import * as moment from "moment";
 
 import "./App.css";
 import { Header } from "./components/Header";
@@ -11,7 +11,7 @@ const MINGDAY_DB = {
   notes: [
     {
       key: 0,
-      text: "Hello world",
+      text: "Hello world 2017!",
       datetime: "2017-01-01"
     },
     {
@@ -30,27 +30,25 @@ class App extends Component {
     });
   }
 
-  onAddNote = (text) => {
-    console.log("onaddnote",this);
+  onAddNote = text => {
     const newNote = {
       text,
       datetime: moment().format(),
       key: this.state.notes.length
-    }
+    };
 
     const notes = this.state.notes.concat(newNote);
     this.setState({
       notes
     });
-  }
+  };
 
   render() {
-    console.log("render", this);
     return (
       <div className="App">
         <Header />
         <NoteList notes={this.state.notes} />
-        <AddNote onAddNote={ this.onAddNote} />
+        <AddNote onAddNote={this.onAddNote} />
       </div>
     );
   }
@@ -60,6 +58,6 @@ const StyledApp = () => (
   <MuiThemeProvider>
     <App />
   </MuiThemeProvider>
-)
+);
 
 export default StyledApp;
