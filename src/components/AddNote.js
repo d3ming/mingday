@@ -1,47 +1,55 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import FlatButton from "material-ui/FlatButton";
+import TextField from "material-ui/TextField";
 
 export class AddNote extends Component {
-  constructor(props) {
+  constructor({onAddNote}) {
     super();
     this.state = {
       adding: false,
-      textToAdd: ''
-    }
+      textToAdd: ""
+    };
   }
 
-  onClickToAdd() {
-    this.setState({
-      adding: true
-    });
-  }
-
-  onAddNote(text) {
+  addNote = e => {
     this.setState({
       adding: false
     });
 
-    this.props.onAddNote();
+    if (!this.state.textToAdd) {
+      console.error('No note text!');
+      return;
+    }
+
+    this.props.onAddNote(this.state.textToAdd);
+  };
+
+  updateNewNoteText = (e, value) => {
+    this.setState({
+      textToAdd: value
+    });
   }
 
   render() {
-    function renderAddNoteButton() {
-      return (
-        <div>
-          <span>Add Note</span>
-        </div>
-      );
-    }
+    const renderAddNoteButton = () => (
+      <FlatButton
+        primary={true}
+        label="New Note"
+        onClick={() => this.setState({adding: true})}
+      />
+    );
 
-    function renderAddingNote() {
-      return (
-        <div class='AddNote-container' onClick={this.onClickToAdd}>
-          <input placeholder="Start typing here..." />
-          <button onClick={() => this.onAddNote(this.state.textToAdd)} />
-        </div>
-      )
-    }
+    const renderAddingNote = () => (
+      <TextField
+        hintText="Start typing..."
+        onClick={this.addNote}
+        onChange={this.updateNewNoteText}
+      />
+    );
 
-    const result = this.state.adding ? renderAddingNote() : renderAddNoteButton();
+    const result = this.state.adding
+      ? renderAddingNote()
+      : renderAddNoteButton();
     return result;
   }
 }
