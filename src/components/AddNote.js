@@ -3,53 +3,50 @@ import FlatButton from "material-ui/FlatButton";
 import TextField from "material-ui/TextField";
 
 export class AddNote extends Component {
-  constructor({onAddNote}) {
+  constructor({ onAddNote }) {
     super();
     this.state = {
-      adding: false,
       textToAdd: ""
     };
   }
-
-  addNote = e => {
-    this.setState({
-      adding: false
-    });
-
-    if (!this.state.textToAdd) {
-      console.error('No note text!');
-      return;
-    }
-
-    this.props.onAddNote(this.state.textToAdd);
-  };
 
   updateNewNoteText = (e, value) => {
     this.setState({
       textToAdd: value
     });
+  };
+
+  addNote = e => {
+    if (e.key !== "Enter" || !this.state.textToAdd) {
+      return;
+    }
+
+    const textToAdd = this.state.textToAdd;
+    this.setState({
+      adding: false,
+      textToAdd: ""
+    });
+
+    this.props.onAddNote(textToAdd);
+  };
+
+  focusInput = () => {
+    this.addNoteInput.focus();
+  }
+
+  componentDidMount() {
+    this.focusInput();
   }
 
   render() {
-    const renderAddNoteButton = () => (
-      <FlatButton
-        primary={true}
-        label="New Note"
-        onClick={() => this.setState({adding: true})}
-      />
-    );
-
-    const renderAddingNote = () => (
+    return (
       <TextField
+        ref={input => { this.addNoteInput = input; }}
         hintText="Start typing..."
-        onClick={this.addNote}
         onChange={this.updateNewNoteText}
+        onKeyPress={this.addNote}
+        value={this.state.textToAdd}
       />
     );
-
-    const result = this.state.adding
-      ? renderAddingNote()
-      : renderAddNoteButton();
-    return result;
   }
 }
