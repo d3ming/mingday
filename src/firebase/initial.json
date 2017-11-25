@@ -1,0 +1,22 @@
+{
+  "users": {
+    "mingdom": {
+      "name": "Dong Ming"
+    }
+  },
+  "days": {
+    "mingdom": {
+      "2017-01-01": [
+        {
+          "text": "Hello world",
+          "datetime": "2017-01-01"
+        }
+      ]
+    }
+  },
+  "notes": {
+    "mingdom": {
+
+    }
+  }
+}
