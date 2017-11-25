@@ -9,12 +9,6 @@ export const Note = ({ text, datetime }) => (
 
 // TODO: get data in...
 export const NoteList = ({ notes }) =>
-  _.map(notes, noteObj =>
-    (
-      <Note
-        text={noteObj.text}
-        key={noteObj.key}
-        datetime={noteObj.datetime}
-      />
-    )
-  );
+  _.map(notes, noteObj => (
+    <Note text={noteObj.text} key={noteObj.key} datetime={noteObj.datetime} />
+  ));

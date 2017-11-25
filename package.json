@@ -9,7 +9,9 @@
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -19,10 +21,12 @@
     "deploy": "react-scripts build && firebase deploy"
   },
   "devDependencies": {
+    "babel-eslint": "^8.0.2",
     "eslint": "^4.11.0",
     "eslint-config-prettier": "^2.7.0",
     "eslint-plugin-jest": "^21.3.2",
     "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.5.1",
     "prettier": "^1.8.2"
   }
 }

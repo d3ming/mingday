@@ -2,32 +2,21 @@ import React, { Component } from "react";
 import TextField from "material-ui/TextField";
 
 export class AddNote extends Component {
-  constructor({ onAddNote }) {
-    super();
-    this.state = {
-      textToAdd: ""
-    };
-  }
-
-  updateNewNoteText = (e, value) => {
-    this.setState({
-      textToAdd: value
-    });
+  focusInput = () => {
+    this.addNoteInput.focus();
   };
 
   addNote = e => {
-    if (e.key !== "Enter" || !this.state.textToAdd) {
+    // TODO: Update to use submit instead
+    if (e.key !== "Enter") {
       return;
     }
-    this.props.onAddNote(this.state.textToAdd);
-    this.setState({
-      adding: false,
-      textToAdd: ""
-    });
+
+    this.props.onAddNote();
   };
 
-  focusInput = () => {
-    this.addNoteInput.focus();
+  updateNewNoteText = e => {
+    this.props.inputChange(e.target.value);
   };
 
   componentDidMount() {
@@ -35,6 +24,7 @@ export class AddNote extends Component {
   }
 
   render() {
+    console.log("AddNote props", this.props);
     return (
       <TextField
         ref={input => {
@@ -43,7 +33,7 @@ export class AddNote extends Component {
         hintText="Start typing..."
         onChange={this.updateNewNoteText}
         onKeyPress={this.addNote}
-        value={this.state.textToAdd}
+        value={this.props.newNote}
       />
     );
   }

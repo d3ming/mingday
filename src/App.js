@@ -1,63 +1,19 @@
-import React, { Component } from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import * as moment from "moment";
+import React from 'react';
 
 import "./App.css";
-import { Header } from "./components/Header";
-import { NoteList } from "./components/Note";
-import { AddNote } from "./components/AddNote";
 
-const MINGDAY_DB = {
-  notes: [
-    {
-      key: 0,
-      text: "Hello world 2017!",
-      datetime: "2017-01-01"
-    },
-    {
-      key: 1,
-      text: "It's my birthday",
-      datetime: "2017-01-03"
-    }
-  ]
-};
+import { MingdayAppContainer } from "./containers/MingdayAppContainer";
 
-class App extends Component {
-  componentWillMount() {
-    const initialData = MINGDAY_DB;
-    this.setState({
-      notes: initialData.notes
-    });
-  }
+// Redux
+import { Provider } from 'react-redux';
+import { configureStore } from './redux/configureStore';
 
-  onAddNote = text => {
-    const newNote = {
-      text,
-      datetime: moment().format(),
-      key: this.state.notes.length
-    };
+const store = configureStore();
 
-    const notes = this.state.notes.concat(newNote);
-    this.setState({
-      notes
-    });
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <NoteList notes={this.state.notes} />
-        <AddNote onAddNote={this.onAddNote} />
-      </div>
-    );
-  }
-}
-
-const StyledApp = () => (
-  <MuiThemeProvider>
-    <App />
-  </MuiThemeProvider>
+const ReduxApp = () => (
+  <Provider store={store}>
+    <MingdayAppContainer />
+  </Provider>
 );
 
-export default StyledApp;
+export default ReduxApp;
